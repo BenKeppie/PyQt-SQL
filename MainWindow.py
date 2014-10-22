@@ -1,7 +1,9 @@
 import sys
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
+
 from SQLConnection import *
+from DisplayWidget import * 
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -40,8 +42,8 @@ class MainWindow(QMainWindow):
         self.open_database.triggered.connect(self.open_connection)
         self.close_database.triggered.connect(self.close_connection)
 
-        self.find_products.triggered.connect(self.find_products)
-        self.show_products.triggered.connect(self.display_products)
+        self.find_products.triggered.connect(self.find_data)
+        self.show_products.triggered.connect(self.display_data)
 
 
     def open_connection(self):
@@ -55,12 +57,15 @@ class MainWindow(QMainWindow):
     def close_connection(self):
         print("Closing Database")
 
-    def display_products(self):
-        if not hasattr(self,display_widget):
+    def display_data(self):
+        if not hasattr(self,"display_widget"):
             self.display_widget=DisplayWidget()
         self.setCentralWidget(self.display_widget)
-        query=self.conection.find_products_by_number((1,))
+        query=self.connection.find_products((1,))
         self.display_widget.show_results(query)
+
+    def find_data(self):
+        pass
         
 
 if __name__=="__main__":

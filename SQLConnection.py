@@ -23,5 +23,5 @@ class SQLConnection:
     def closeEvent(self,event):
         self.close_database()
 
-    def find_products(self):
+    def find_products(self,values):
         pass
